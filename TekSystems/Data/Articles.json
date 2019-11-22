@@ -1,0 +1,65 @@
+[
+  {
+    "ItemID": 1,
+    "ItemName": "Book",
+    "ItemDescription": "This is a book about Tek Systems",
+    "Price": 12.49,
+    "AvailableTaxes": []
+  },
+  {
+    "ItemID": 2,
+    "ItemName": "Music CD",
+    "ItemDescription": "This is a mp3 CD music",
+    "Price": 14.99,
+    "AvailableTaxes": [ 1 ]
+  },
+  {
+    "ItemID": 3,
+    "ItemName": "Chocolate bar",
+    "ItemDescription": "This is a Chocolate bar",
+    "Price": 0.85,
+    "AvailableTaxes": []
+  },
+  {
+    "ItemID": 4,
+    "ItemName": "Imported box of chocolates A",
+    "ItemDescription": "This is an imported box of chocolates",
+    "Price": 10.00,
+    "AvailableTaxes": [ 2 ]
+  },
+  {
+    "ItemID": 5,
+    "ItemName": "Imported box of chocolates B",
+    "ItemDescription": "This is an imported box of chocolates",
+    "Price": 11.25,
+    "AvailableTaxes": [ 2 ]
+  },
+  {
+    "ItemID": 6,
+    "ItemName": "Bottle of perfume",
+    "ItemDescription": "This is a bottle of perfume",
+    "Price": 18.99,
+    "AvailableTaxes": [ 1 ]
+  },
+  {
+    "ItemID": 7,
+    "ItemName": "Imported bottle of perfume A",
+    "ItemDescription": "This is an imported bottle of perfume",
+    "Price": 47.50,
+    "AvailableTaxes": [ 1, 2 ]
+  },
+  {
+    "ItemID": 8,
+    "ItemName": "Imported bottle of perfume B",
+    "ItemDescription": "This is an imported bottle of perfume",
+    "Price": 27.99,
+    "AvailableTaxes": [ 1, 2 ]
+  },
+  {
+    "ItemID": 9,
+    "ItemName": "Packet of headache pills",
+    "ItemDescription": "This is a packet of headache pills",
+    "Price": 9.75,
+    "AvailableTaxes": []
+  }
+]
