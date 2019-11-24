@@ -23,7 +23,7 @@ namespace TekSystems.Main
         {
             ShoppingCart = Factory.CreateShoppingCart();
             //Print main info in console
-            Console.Write("Welcome to TEK Store\n\nIn this application you can select 3 predefined shopping carts (inputs) and the receipts (output) will be calculated automatically. Making use of the code I created for the predefined inputs I set a new option where you can build your own shopping cart.\n");
+            Console.Write("Welcome to TEK Store\n\nIn this application you can select 3 predefined shopping carts (inputs) and the receipts (output) will be calculated automatically. \n");
             Console.WriteLine("");            
             ShowInfo();
             try
@@ -66,6 +66,8 @@ namespace TekSystems.Main
                     ProcessPredefinedList(listId);
                     ShoppingCart = Factory.CreateShoppingCart();
                     break;
+                #region Uncomment for Custom Shopping Cart
+                    /*
                 case "showarticles":
                     ShowArticlesInStore();
                     break;
@@ -85,10 +87,12 @@ namespace TekSystems.Main
                 case "checkout":
                     blo.CheckOut(ShoppingCart);
                     ShoppingCart = Factory.CreateShoppingCart();
-                    break;
+                    break;*/
+                #endregion
                 case "clear":
                     ShoppingCart = Factory.CreateShoppingCart();
-                    Console.Clear();                    
+                    Console.Clear();
+                    ShowInfo();
                     break;
                 default:
                     Console.WriteLine("\nInvalid Command\n");
@@ -100,12 +104,14 @@ namespace TekSystems.Main
         {
             Console.WriteLine("- pInput         : Generates a shopping cart based on the coding exercise document info.");
             Console.WriteLine("----------------------------------------------------------------------------------------");
-            Console.WriteLine("- info           : Shows all the different calls the user can make.");
-            Console.WriteLine("- showArticles   : Shows all the articles in the system.");
-            Console.WriteLine("- addArticle     : Method for adding Articles in ShoppingCart.");
-            Console.WriteLine("- removeArticle  : Method for removing Articles from the ShoppingCart.");
-            Console.WriteLine("- shoppingCart   : Shows the articles in the shopping cart.");
-            Console.WriteLine("- checkout       : Finalize shopping process and generates the receipt.");
+            Console.WriteLine("- info           : Shows all the different actions the user can make.");
+            #region Uncomment for Custom Shopping Cart
+            //Console.WriteLine("- showArticles   : Shows all the articles in the system.");
+            //Console.WriteLine("- addArticle     : Method for adding Articles in ShoppingCart.");
+            //Console.WriteLine("- removeArticle  : Method for removing Articles from the ShoppingCart.");
+            //Console.WriteLine("- shoppingCart   : Shows the articles in the shopping cart.");
+            //Console.WriteLine("- checkout       : Finalize shopping process and generates the receipt.");
+            #endregion
             Console.WriteLine("- clear          : Clear console and shopping cart.");
             Console.WriteLine("- exit           : End process.\n");
         }
@@ -158,6 +164,10 @@ namespace TekSystems.Main
         }
         #endregion
 
+
+        /*
+         * I CREATED THIS SECTION FOR HAVING CUSTOM INPUT OPTION. I KNOW THE DOCUMENT SAYS IT IS NOT NECESARY BUT I WANTED TO SHOW THE APP HAS AN EXPANDABLE DESIGN.
+         */
         #region BLO interaction
 
         private static void AddArticle(int itemID, bool isCustomList)

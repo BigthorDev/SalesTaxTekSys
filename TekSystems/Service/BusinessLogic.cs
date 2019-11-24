@@ -47,6 +47,7 @@ namespace TekSystems.Service
             Console.WriteLine($"Price Before Taxes \t {MathRound.MathRoundTwoDecimals(_receipt.FinalPriceBeforeTaxes):C2}");
             Console.WriteLine($"\nTotal Taxes \t\t {_receipt.TotalTaxes:C2}");
             Console.WriteLine($"Total \t\t\t {_receipt.FinalPrice:C2}");
+            Console.WriteLine("");
 
             return _receipt;
         }
