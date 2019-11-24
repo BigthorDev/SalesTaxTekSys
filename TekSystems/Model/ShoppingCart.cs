@@ -22,6 +22,17 @@ namespace TekSystems.Model
 
         public List<IShoppingCartItem> CartItems { get; set; }
 
+        public void Print(IShoppingCart shoppingCart)
+        {
+            Console.WriteLine("");
+            if (shoppingCart.CartItems.Count < 1)
+                Console.WriteLine("Shopping Cart is empty");
+            else
+                shoppingCart.CartItems.ForEach(art => Console.WriteLine($"- Article: { art.SelectedItem.ItemName } - Qty: {art.Amount.ToString()}"));
+
+            Console.WriteLine("");
+        }
+
         public List<IShoppingCartItem> AddProduct(IShoppingCartItem item, List<IShoppingCartItem> currentCartItems)
         {
             IShoppingCartItem tempItem = currentCartItems.FindLast(p => p.SelectedItem.ItemID == item.SelectedItem.ItemID);

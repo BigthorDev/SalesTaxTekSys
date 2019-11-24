@@ -6,6 +6,9 @@ using TekSystems.Utilities;
 
 namespace TekSystems.Main
 {
+    /// <summary>
+    /// SalesTax Coding Exercise - .Net and Java - Tek Systems 
+    /// </summary>
     class Program
     {
         #region Properties and Variables

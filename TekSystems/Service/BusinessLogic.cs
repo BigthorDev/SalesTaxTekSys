@@ -33,13 +33,7 @@ namespace TekSystems.Service
 
         public void PrintShoppingCart(IShoppingCart shoppingCart)
         {
-            Console.WriteLine("");
-            if (shoppingCart.CartItems.Count < 1)
-                Console.WriteLine("Shopping Cart is empty");
-            else
-                shoppingCart.CartItems.ForEach(art => Console.WriteLine($"- Article: { art.SelectedItem.ItemName } - Qty: {art.Amount.ToString()}"));
-
-            Console.WriteLine("");
+            _shoppingCart.Print(shoppingCart);
         }
 
         public IReceipt CheckOut(IShoppingCart shoppingCart)
