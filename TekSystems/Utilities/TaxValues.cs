@@ -6,8 +6,8 @@ namespace TekSystems.Utilities
 {
     public struct TaxValues
     {
-        public const double SALES_TAX = 0.1;
-        public const double IMPORTED_TAX = 0.05;
+        public const decimal SALES_TAX = 0.1m;
+        public const decimal IMPORTED_TAX = 0.05m;
 
     }
 }

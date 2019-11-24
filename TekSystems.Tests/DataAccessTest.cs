@@ -24,7 +24,7 @@ namespace TekSystems.Tests
             IItem expected = FactoryTest.CreateItem();
             expected.ItemID = 1;
             expected.ItemName = "Book";
-            expected.Price = 12.49;
+            expected.Price = 12.49m;
             expected.ItemDescription = "This is a book about Tek Systems";
             expected.AvailableTaxes = new int[0];
 
@@ -35,24 +35,23 @@ namespace TekSystems.Tests
             Assert.AreEqual(expected.Price, actual.Price);
         }
 
+        /// <summary>
+        /// Validation Test
+        /// </summary>
         [TestMethod]
         public void NumericValidation()
         {
             bool isNumeric = false;
-            do
+            var input = "110b";
+            int response = -1;
+
+            if (int.TryParse(input, out int tmpResp))
             {
-                int response = -1;
-                if (int.TryParse("110b", out int tmpResp))
-                {
-                    response = tmpResp;
-                    isNumeric = true;
-                }
-                else
-                {
-                    var test = Console.ReadLine();
-                }
+                response = tmpResp;
+                isNumeric = true;
             }
-            while (!isNumeric);
+
+            Assert.IsTrue(isNumeric);
         }
     }
 }

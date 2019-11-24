@@ -20,7 +20,7 @@ namespace TekSystems.Main
         {
             ShoppingCart = Factory.CreateShoppingCart();
             //Print main info in console
-            Console.Write("Welcome to TEK Store\nIn this task there are 2 different options, you can select predefined inputs or you can build your own shopping cart.\n");
+            Console.Write("Welcome to TEK Store\n\nIn this application you can select 3 predefined shopping carts (inputs) and the receipts (output) will be calculated automatically. Making use of the code I created for the predefined inputs I set a new option where you can build your own shopping cart.\n");
             Console.WriteLine("");            
             ShowInfo();
             try
@@ -48,6 +48,7 @@ namespace TekSystems.Main
         }
 
         #region Interface Interaction
+
         private static void ExecuteActionCall(string actionCall)
         {
             switch (actionCall)
@@ -55,7 +56,7 @@ namespace TekSystems.Main
                 case "info":
                     ShowInfo();
                     break;
-                case "predefinedinput":
+                case "pinput":
                     blo = Factory.CreateBusinessLogic();
                     Console.WriteLine("\nPlease insert the predefined Input ID you want to check (1 to 3)");
                     int listId = validator.ValidateListIDValue(Console.ReadLine());
@@ -83,7 +84,8 @@ namespace TekSystems.Main
                     ShoppingCart = Factory.CreateShoppingCart();
                     break;
                 case "clear":
-                    Console.Clear();
+                    ShoppingCart = Factory.CreateShoppingCart();
+                    Console.Clear();                    
                     break;
                 default:
                     Console.WriteLine("\nInvalid Command\n");
@@ -93,7 +95,7 @@ namespace TekSystems.Main
 
         private static void ShowInfo()
         {
-            Console.WriteLine("- predefinedInput: Generates a shopping cart based on the coding exercise document info.");
+            Console.WriteLine("- pInput         : Generates a shopping cart based on the coding exercise document info.");
             Console.WriteLine("----------------------------------------------------------------------------------------");
             Console.WriteLine("- info           : Shows all the different calls the user can make.");
             Console.WriteLine("- showArticles   : Shows all the articles in the system.");
@@ -101,7 +103,7 @@ namespace TekSystems.Main
             Console.WriteLine("- removeArticle  : Method for removing Articles from the ShoppingCart.");
             Console.WriteLine("- shoppingCart   : Shows the articles in the shopping cart.");
             Console.WriteLine("- checkout       : Finalize shopping process and generates the receipt.");
-            Console.WriteLine("- clear          : Clear console.");
+            Console.WriteLine("- clear          : Clear console and shopping cart.");
             Console.WriteLine("- exit           : End process.\n");
         }
 

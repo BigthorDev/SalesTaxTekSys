@@ -11,7 +11,7 @@ namespace TekSystems.Model
         public int ItemID { get; set; }
         public string ItemName { get; set; }
         public string ItemDescription { get; set; }
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         public int[] AvailableTaxes { get; set; }
 
         public Item()
@@ -19,7 +19,7 @@ namespace TekSystems.Model
 
         }
 
-        public Item(int itemID, string itemName, string itemDescription, double price, int[] availableTaxes)
+        public Item(int itemID, string itemName, string itemDescription, decimal price, int[] availableTaxes)
         {
             this.ItemID = itemID;
             this.ItemName = itemName;
@@ -28,30 +28,29 @@ namespace TekSystems.Model
             this.AvailableTaxes = availableTaxes;
         }
 
-        public double GetTotalTaxes()
+        public decimal GetTotalTaxes()
         {
-            Double total = 0.0;
+            decimal total = 0;
             foreach (var tt in GetTotalTaxDetail())
             {
-                total += (double)tt.Value;
+                total += (decimal)tt.Value;
             }
-            return Math.Round(total, 2);
+            return MathRound.MathRoundTwoDecimals(total);
         }
 
 
-        public Dictionary<int, double> GetTotalTaxDetail()
+        public Dictionary<int, decimal> GetTotalTaxDetail()
         {
-            double taxValue = 0;
-            Dictionary<int, double> allTaxes = new Dictionary<int, double>();
+            decimal taxValue = 0;
+            Dictionary<int, decimal> allTaxes = new Dictionary<int, decimal>();
 
-            // this was with somebody's help that knows reflection.
             foreach (var tax in Enum.GetNames(typeof(TaxTypes)))
             {
                 int taxTypeID = (int)Enum.Parse(typeof(TaxTypes), tax);
                 if (AvailableTaxes.Contains(taxTypeID))
                 {
-                    double taxAmount = (double)typeof(TaxValues).GetField(tax).GetValue(new TaxValues());
-                    taxValue = Math.Round(this.Price * taxAmount, 2);
+                    decimal taxAmount = (decimal)typeof(TaxValues).GetField(tax).GetValue(new TaxValues());
+                    taxValue = this.Price * taxAmount;
                     allTaxes.Add(taxTypeID, taxValue);
                 }
             }

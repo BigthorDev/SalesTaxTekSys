@@ -9,8 +9,8 @@ namespace TekSystems.Model
         protected int ReceiptID { get; set; }
         public IShoppingCartItem[] SelectedItems { get; set; }
         public int TotalItems { get; set; }
-        public double FinalPrice { get; set; }
-        public double FinalPriceBeforeTaxes { get; set; }
-        public double TotalTaxes { get; set; }
+        public decimal FinalPrice { get; set; }
+        public decimal FinalPriceBeforeTaxes { get; set; }
+        public decimal TotalTaxes { get; set; }
     }
 }

@@ -5,7 +5,7 @@ namespace TekSystems.Service
 {
     public interface IBusinessLogic
     {
-        double CalculateTotalTaxes(IShoppingCart shoppingCart);
+        decimal CalculateTotalTaxes(IShoppingCart shoppingCart);
         IReceipt CheckOut(IShoppingCart shoppingCart);
         void PrintShoppingCart(IShoppingCart shoppingCart);
         List<Item> GetAllItemsInStore();

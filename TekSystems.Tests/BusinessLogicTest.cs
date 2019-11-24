@@ -22,8 +22,8 @@ namespace TekSystems.Tests
         public void CalculateItemTotalTaxes()
         {
             var allArticles = dao.GetAllItems();
-            double expected = Math.Round(allArticles[7].Price * (TaxValues.IMPORTED_TAX + TaxValues.SALES_TAX), 2);
-            double actual = allArticles[7].GetTotalTaxes();
+            decimal expected = MathRound.MathRoundTwoDecimals(allArticles[7].Price * (TaxValues.IMPORTED_TAX + TaxValues.SALES_TAX));
+            decimal actual = allArticles[7].GetTotalTaxes();
             Assert.AreEqual(expected, actual);
         }
 

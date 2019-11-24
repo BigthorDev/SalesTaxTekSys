@@ -8,9 +8,9 @@ namespace TekSystems.Model
         string ItemDescription { get; set; }
         int ItemID { get; set; }
         string ItemName { get; set; }
-        double Price { get; set; }
+        decimal Price { get; set; }
 
-        Dictionary<int, double> GetTotalTaxDetail();
-        double GetTotalTaxes();
+        Dictionary<int, decimal> GetTotalTaxDetail();
+        decimal GetTotalTaxes();
     }
 }

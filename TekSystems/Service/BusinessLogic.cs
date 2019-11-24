@@ -26,7 +26,7 @@ namespace TekSystems.Service
             _shoppingCart = shoppingCart;
         }
 
-        public double CalculateTotalTaxes(IShoppingCart shoppingCart)
+        public decimal CalculateTotalTaxes(IShoppingCart shoppingCart)
         {
             return 0;
         }
@@ -46,30 +46,13 @@ namespace TekSystems.Service
         {
             Console.WriteLine("\n---------------- RECEIPT ------------------\n");
             Console.WriteLine(">> ARTICLES:");
-            double totalInTaxes = 0;
 
-            foreach (IShoppingCartItem item in shoppingCart.CartItems)
-            {
-                var taxes = item.SelectedItem.GetTotalTaxDetail();
-                Console.WriteLine($"\n-Item: { item.SelectedItem.ItemName}\t-Qty: { item.Amount}\n-Unit Price: $ { item.SelectedItem.Price}\t-Total Price :${ item.SelectedItem.Price * item.Amount}");
-                
-                //Gets the value of the taxes based on the enum y struct
-                foreach (int taxID in taxes.Keys)
-                {
-                    double totalTaxByQuantity = Math.Round(item.Amount * taxes[taxID], 2);
-                    Console.WriteLine(">>> " + Enum.GetName(typeof(TaxTypes), taxID) + " \t= $ " + totalTaxByQuantity);
-                    totalInTaxes += totalTaxByQuantity;
-                }
+            CalculateFinalItemsReceipt(shoppingCart);
 
-                _receipt.FinalPriceBeforeTaxes += item.SelectedItem.Price * item.Amount;
-            }
-            _receipt.TotalTaxes = Math.Round(totalInTaxes, 2);
-            _receipt.FinalPrice = _receipt.FinalPriceBeforeTaxes + _receipt.TotalTaxes;
-
-            Console.WriteLine("\n---------------- RESUME ------------------\n");
-            Console.WriteLine($"Price Before Taxes \t$ {Math.Round(_receipt.FinalPriceBeforeTaxes,2)}");
-            Console.WriteLine($"Total Taxes \t\t$ {_receipt.TotalTaxes}");
-            Console.WriteLine($"\nTotal \t\t\t$ {Math.Round(_receipt.FinalPrice,2)}");
+            Console.WriteLine("\n----------------- RESUME -------------------\n");
+            Console.WriteLine($"Price Before Taxes \t {MathRound.MathRoundTwoDecimals(_receipt.FinalPriceBeforeTaxes):C2}");
+            Console.WriteLine($"\nTotal Taxes \t\t {_receipt.TotalTaxes:C2}");
+            Console.WriteLine($"Total \t\t\t {_receipt.FinalPrice:C2}");
 
             return _receipt;
         }
@@ -93,6 +76,34 @@ namespace TekSystems.Service
         {
             return _shoppingCart.RemoveProduct(item, currentCartItems);
         }
+
+        private void CalculateFinalItemsReceipt(IShoppingCart shoppingCart)
+        {
+            //decimal totalInTaxes = 0;
+            foreach (IShoppingCartItem item in shoppingCart.CartItems)
+            {
+                var singleItemtaxes = item.SelectedItem.GetTotalTaxDetail();
+                decimal totalSingleItemTaxes = item.SelectedItem.GetTotalTaxes();
+                decimal itemTotalPriceWithTaxes = (item.SelectedItem.Price + totalSingleItemTaxes) * item.Amount;
+
+                Console.WriteLine($"\n-Item: { item.SelectedItem.ItemName}" +
+                                    $"\n\t-Qty: { item.Amount}" +
+                                    $"\n\t-Unit Price: { item.SelectedItem.Price:C2}" +
+                                    $"\n\t-Total Price with taxes: {Math.Round(itemTotalPriceWithTaxes,2) :C2}");
+
+                //Gets the value of the taxes based on the enum y struct
+                foreach (int taxID in singleItemtaxes.Keys)
+                {
+                    decimal totalTaxByQuantity = MathRound.MathRoundTwoDecimals(item.Amount * singleItemtaxes[taxID]);
+                    Console.WriteLine("\t>>> " + Enum.GetName(typeof(TaxTypes), taxID) + " \t= $ " + totalTaxByQuantity.ToString("C2"));
+                    //totalInTaxes += totalTaxByQuantity;
+                }
+                _receipt.FinalPrice += itemTotalPriceWithTaxes;
+                _receipt.TotalTaxes += totalSingleItemTaxes;
+                _receipt.FinalPriceBeforeTaxes += item.SelectedItem.Price * item.Amount;
+            }
+        }
+
       
     }
 }
